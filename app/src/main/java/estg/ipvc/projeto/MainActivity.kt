@@ -3,7 +3,6 @@ package estg.ipvc.projeto
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import estg.ipvc.projeto.adapter.LineAdapter
@@ -31,10 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun insert(view: View) {
-        myList.add(0, Place("Terça-Feira","PARTIU O MOTOR", "24/02/23 XXX"))
-        recycler_view.adapter?.notifyDataSetChanged()
-    }
+   
 
    /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
