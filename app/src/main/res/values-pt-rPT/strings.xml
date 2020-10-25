@@ -4,5 +4,11 @@
     <string name="file">ficheiro</string>
     <string name="create_new">criar_novo</string>
     <string name="open">abrir</string>
-    <string name="Editar">Editar</string>
+    <string name="Edit">Editar</string>
+    <string name="Options">Opções</string>
+    <string name="Insert">Inserir</string>
+    <string name="Remove">Remover</string>
+    <string name="Inserting">Inserindo</string>
+    <string name="Removing">Removendo</string>
+    <string name="Editing">Editando</string>
 </resources>

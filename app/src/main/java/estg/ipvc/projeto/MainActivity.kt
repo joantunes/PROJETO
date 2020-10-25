@@ -39,19 +39,19 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection
         return when(item.itemId) {
             R.id.create_new-> {
-                Toast.makeText(this, "Inserir..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Inserting..", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Inserir::class.java).apply {}
                 startActivity(intent)
                 true
             }
             R.id.remove -> {
-                Toast.makeText(this, "Remover..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Removing..", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Remover::class.java).apply {}
                 startActivity(intent)
                 true
             }
             R.id.edit -> {
-                Toast.makeText(this, "Editar..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Editing..", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Editar::class.java).apply {}
                 startActivity(intent)
                 true

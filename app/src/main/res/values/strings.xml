@@ -3,5 +3,11 @@
     <string name="file">file</string>
     <string name="create_new">create_new</string>
     <string name="open">open</string>
-    <string name="Editar">Edit</string>
+    <string name="Edit">Edit</string>
+    <string name="Options">Options</string>
+    <string name="Insert">Insert</string>
+    <string name="Remove">Remove</string>
+    <string name="Inserting">Inserting</string>
+    <string name="Removing">Removing</string>
+    <string name="Editing">Edtiting</string>
 </resources>
