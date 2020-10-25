@@ -1,9 +1,9 @@
 package estg.ipvc.projeto
 
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import estg.ipvc.projeto.adapter.LineAdapter
@@ -36,14 +36,14 @@ class MainActivity : AppCompatActivity() {
         recycler_view.adapter?.notifyDataSetChanged()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+   /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when(item.itemId){
             R.id.create_new -> {
-                Toast.makeText(this,"create_new", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Inserir", Toast.LENGTH_SHORT).show()
                 true
             }
-            R.id.opcao2 -> {
+            R.id -> {
                 Toast.makeText(this,"opcao2", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -62,4 +62,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
 }
