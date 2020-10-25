@@ -1,8 +1,11 @@
 package estg.ipvc.projeto
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import estg.ipvc.projeto.adapter.LineAdapter
@@ -30,36 +33,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-   
 
-   /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when(item.itemId){
-            R.id.create_new -> {
-                Toast.makeText(this,"Inserir", Toast.LENGTH_SHORT).show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when(item.itemId) {
+            R.id.create_new-> {
+                Toast.makeText(this, "Inserir..", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Inserir::class.java).apply {}
+                startActivity(intent)
                 true
             }
-            R.id -> {
-                Toast.makeText(this,"opcao2", Toast.LENGTH_SHORT).show()
+            R.id.remove -> {
+                Toast.makeText(this, "Remover..", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Remover::class.java).apply {}
+                startActivity(intent)
                 true
             }
-            R.id.opcao3 -> {
-                Toast.makeText(this,"opcao3", Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.opcao4 -> {
-                Toast.makeText(this,"opca4", Toast.LENGTH_SHORT).show()
+            R.id.edit -> {
+                Toast.makeText(this, "Editar..", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Editar::class.java).apply {}
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-
-
-
-
     }
-
-    */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
