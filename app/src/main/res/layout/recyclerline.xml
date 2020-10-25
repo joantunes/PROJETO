@@ -6,25 +6,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/title"
         android:layout_margin="10dp"
         android:textStyle="bold"
-        android:text="Madrid"
+        android:text="Terça-Feira"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
-        android:id="@+id/capital"
-        android:text="Spain"
-        android:layout_below="@id/name"
-        android:layout_alignLeft="@+id/name"
+        android:id="@+id/notes"
+        android:text="Reunião"
+        android:layout_below="@id/title"
+        android:layout_alignLeft="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
-        android:id="@+id/habitants"
-        android:text="90000212"
-        android:layout_alignTop="@id/name"
+        android:id="@+id/date"
+        android:text="24/02/20"
+        android:layout_alignTop="@id/date"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_width="wrap_content"

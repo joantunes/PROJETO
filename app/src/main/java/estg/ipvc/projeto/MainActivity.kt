@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
 
         for (i in 0 until 500) {
-            myList.add(Place( "Country $i", i*500, "Capital $i"))
+            myList.add(Place( "Segunda-Feira$i", "NOTA:$i", "23-32-23"))
         }
         recycler_view.adapter = LineAdapter(myList)
         recycler_view.layoutManager = LinearLayoutManager(this)
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun insert(view: View) {
-        myList.add(0, Place("Country XXX",999, "Capital XXX"))
+        myList.add(0, Place("Terça-Feira","PARTIU O MOTOR", "24/02/23 XXX"))
         recycler_view.adapter?.notifyDataSetChanged()
     }
 }

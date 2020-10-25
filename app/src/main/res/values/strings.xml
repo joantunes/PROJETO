@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PROJETO</string>
+    <string name="file">file</string>
+    <string name="create_new">create_new</string>
+    <string name="open">open</string>
 </resources>
