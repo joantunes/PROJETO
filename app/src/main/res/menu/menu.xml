@@ -4,6 +4,7 @@
 
     <item  android:id="@+id/file"
         android:title="@string/file"
+        android:icon="@drawable/abc_vector_test"
         app:showAsAction="always">
         <menu>
             <item android:id="@+id/create_new"
@@ -19,6 +20,11 @@
     </item>
     <item android:id="@+id/opcao3"
         android:title="opcao3"
+        app:showAsAction="ifRoom">
+
+    </item>
+    <item android:id="@+id/opcao4"
+        android:title="opcao4"
         app:showAsAction="ifRoom">
 
     </item>
