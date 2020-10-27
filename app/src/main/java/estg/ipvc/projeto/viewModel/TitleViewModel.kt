@@ -1,19 +1,16 @@
 package estg.ipvc.projeto.viewModel
 
 import android.app.Application
-import android.service.quicksettings.Tile
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import estg.ipvc.projeto.dao.TitleDao
 import estg.ipvc.projeto.db.TitleDB
-import estg.ipvc.projeto.db.TitleDB.TitleDB.Companion.getDatabase
-
 
 import estg.ipvc.projeto.db.TitleRepository
 import estg.ipvc.projeto.entities.Title
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 
 
@@ -27,8 +24,8 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
         val allTitles: LiveData<List<Title>>
 
         init {
-            val TitleDao = TitleDB.TitleDB.getDatabase(application,viewModelScope).
-            repository = TitleRepository(TitleDao)
+            val titlesDao = TitleDB.getDatabase(application,viewModelScope).titleDao()
+            repository = TitleRepository(titlesDao)
             allTitles = repository.allTitles
         }
 

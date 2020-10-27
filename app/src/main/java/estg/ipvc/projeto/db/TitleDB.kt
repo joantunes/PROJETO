@@ -16,7 +16,7 @@ class TitleDB {
     @Database(entities = arrayOf(Title::class), version = 4, exportSchema = false)
     public abstract class TitleDB : RoomDatabase() {
 
-        abstract fun TitleDao(): TitleDao
+        abstract fun titleDao(): TitleDao
 
 
         private class WordDataBaseCallBack(
@@ -28,7 +28,7 @@ class TitleDB {
                 super.onOpen(db)
                 INSTANCE?.let { database ->
                     scope.launch {
-                        var titleDao = database.()
+                        var titleDao = database.titleDao()
 
 
                         titleDao.deleteAll()
@@ -53,23 +53,22 @@ class TitleDB {
             private var INSTANCE: TitleDB? = null
 
             fun getDatabase(context: Context, scope: CoroutineScope): TitleDB {
-                val tempInstance = INSTANCE
-                if (tempInstance != null) {
-                    return tempInstance
-                }
-                synchronized(this) {
+
+                // if the INSTANCE is not null, then return it,
+                // if it is, then create the database
+                return INSTANCE ?: synchronized(this) {
                     val instance = Room.databaseBuilder(
                         context.applicationContext,
                         TitleDB::class.java,
                         "title_database"
                     )
-                        .addCallback(WordDataBaseCallBack(scope))
+                        .addCallback(WordDatabaseCallback(scope))
                         .build()
-
                     INSTANCE = instance
-                    return instance
-                }
+                    // return instance
+                    instance
 
+                }
             }
         }
     }
