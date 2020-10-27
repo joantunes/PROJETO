@@ -14,6 +14,11 @@ class TitleRepository {
         // Observed LiveData will notify the observer when the data has changed.
         val allTitles: LiveData<List<Title>> = titleDao.getAlphabetizedWords()
 
+
+
+
+
+
         suspend fun insert(title: Title) {
             titleDao.insert(title)
         }
