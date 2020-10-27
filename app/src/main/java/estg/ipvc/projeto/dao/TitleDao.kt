@@ -14,11 +14,11 @@ interface TitleDao {
     interface TitleDao {
 
         @Query("SELECT * from title_table ORDER BY title ASC")
-        fun getAlphabetizedWords(): LiveData<List<Title>>
+        fun getAlphabetizedTitles(): LiveData<List<Title>>
 
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
-        suspend fun insert(word: Title)
+        suspend fun insert(title: Title)
 
         @Query("DELETE FROM title_table")
         suspend fun deleteAll()
