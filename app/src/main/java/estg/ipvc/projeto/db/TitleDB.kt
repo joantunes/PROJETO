@@ -1,7 +1,6 @@
 package estg.ipvc.projeto.db
 
 import android.content.Context
-import android.provider.SyncStateContract.Helpers.insert
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -11,64 +10,57 @@ import estg.ipvc.projeto.entities.Title
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class TitleDB {
-    // Annotates class to be a Room Database with a table (entity) of the Word class
-    @Database(entities = arrayOf(Title::class), version = 4, exportSchema = false)
-    public abstract class TitleDB : RoomDatabase() {
+// Annotates class to be a Room Database with a table (entity) of the Word class
+@Database(entities = arrayOf(Title::class), version = 5, exportSchema = false)
+public abstract class TitleDB : RoomDatabase() {
 
-        abstract fun titleDao(): TitleDao
+    abstract fun titleDao(): TitleDao
 
+    private class WordDataBaseCallback(
+        private val scope: CoroutineScope
+    ) : RoomDatabase.Callback() {
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                scope.launch {
+                    var titleDao = database.titleDao()
 
-        private class WordDataBaseCallBack(
-            private val scope: CoroutineScope
-        ) : RoomDatabase.Callback() {
+                    // Delete all content here.
+                    titleDao.deleteAll()
 
-
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
-                INSTANCE?.let { database ->
-                    scope.launch {
-                        var titleDao = database.titleDao()
-
-
-                        titleDao.deleteAll()
-
-                        // Add sample words.
-                        var title = Title(1, "Viana do Castelo", "PASSOU?", "12-02-00")
-                        titleDao.insert(title)
-                        title = Title(2, "Porto", "Semaforo", "12-05-00")
-                        titleDao.insert(title)
-
-
-                    }
+                    //Add sample words
+                    var title = Title(1,"Segunda-Feira","Ir ao Ginásio","27/10/2020")
+                    titleDao.insert(title)
+                    title = Title(2,"Terça-Feira","Ir às compras","28/10/2020")
+                    titleDao.insert(title)
                 }
             }
         }
+    }
 
+    companion object {
+        // Singleton prevents multiple instances of database opening at the
+        // same time.
+        @Volatile
+        private var INSTANCE: TitleDB? = null
 
-        companion object {
-            // Singleton prevents multiple instances of database opening at the
-            // same time.
-            @Volatile
-            private var INSTANCE: TitleDB? = null
-
-            fun getDatabase(context: Context, scope: CoroutineScope): TitleDB {
-
-                // if the INSTANCE is not null, then return it,
-                // if it is, then create the database
-                return INSTANCE ?: synchronized(this) {
-                    val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        TitleDB::class.java,
-                        "title_database"
-                    )
-                        .addCallback(WordDatabaseCallback(scope))
-                        .build()
-                    INSTANCE = instance
-                    // return instance
-                    instance
-
-                }
+        fun getDatabase(context: Context, scope: CoroutineScope): TitleDB {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    TitleDB::class.java,
+                    "titles_database",
+                )
+                    //estratégia de destrução
+                    .fallbackToDestructiveMigration()
+                    .addCallback(WordDataBaseCallback(scope))
+                    .build()
+                INSTANCE = instance
+                return instance
             }
         }
     }

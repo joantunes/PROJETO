@@ -30,15 +30,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        myList = ArrayList<Place>()
+
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         val adapter = TitleAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        for (i in 0 until 500) {
-            myList.add(Place( "Segunda-Feira$i", "NOTA:$i", "23-32-23"))
-        }
+
         recycler_view.adapter = LineAdapter(myList)
         recycler_view.layoutManager = LinearLayoutManager(this)
         //recycler_view.setHasFixedSize(true)
