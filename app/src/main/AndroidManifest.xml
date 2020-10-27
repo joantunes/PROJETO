@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PROJETO">
-        <activity android:name=".AddCity"></activity>
-        <activity android:name=".NovaTitleActivity" />
+        <activity android:name=".AddCity"/>
         <activity android:name=".Remover" />
         <activity android:name=".Editar" />
         <activity android:name=".Inserir" />

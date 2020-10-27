@@ -12,12 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import estg.ipvc.projeto.adapter.LineAdapter
 import estg.ipvc.projeto.adapter.TitleAdapter
 import estg.ipvc.projeto.dataclasses.Place
 import estg.ipvc.projeto.entities.Title
 import estg.ipvc.projeto.viewModel.TitleViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,22 +29,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = TitleAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        recycler_view.adapter = LineAdapter(myList)
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        //recycler_view.setHasFixedSize(true)
         //VIEW MODEL
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@MainActivity, AddCity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
-        }
+
+    }
 
         titleViewModel= ViewModelProvider(this).get(TitleViewModel::class.java)
         titleViewModel.allTitles.observe(this,{ titles -> titles?.let { adapter.setTitles(it) }})
@@ -57,14 +53,21 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            data?.getStringExtra(AddCity.EXTRA_REPLY)?.let {
-                val title = Title(title=it, notes="SEMAFORO",date="27/02/00")
-                titleViewModel.insert(title)
+
+            val ptitle = data?.getStringExtra(AddCity.EXTRA_REPLY_TITLE)
+            val pnote = data?.getStringExtra(AddCity.EXTRA_REPLY_NOTES)
+            val pdate = data?.getStringExtra(AddCity.EXTRA_REPLY_DATE)
+
+
+            if (ptitle != null && pnote != null && pdate != null) {
+                val note = Title(title = ptitle, notes = pnote, date = pdate)
+                titleViewModel.insert(note)
             }
-        } else {
+        }
+        else {
             Toast.makeText(
                 applicationContext,
-                R.string.empty_not_saved,
+               "Titulo vazio!",
                 Toast.LENGTH_LONG).show()
         }
     }

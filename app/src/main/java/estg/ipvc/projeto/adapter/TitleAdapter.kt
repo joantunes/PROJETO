@@ -17,7 +17,7 @@ context: Context
     private var titles = emptyList<Title>() // Cached copy of words
 
     inner class TitleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val TitleItemView : TextView = itemView.findViewById(R.id.create_new)
+        val TitleItemView : TextView = itemView.findViewById(R.id.textView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TitleViewHolder {
