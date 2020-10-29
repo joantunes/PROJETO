@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.remove -> {
+
                 Toast.makeText(this, "Removing..", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Remover::class.java).apply {}
                 startActivity(intent)

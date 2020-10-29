@@ -12,6 +12,10 @@ interface TitleDao {
     @Query("SELECT * from title_table ORDER BY title ASC")
     fun getAlphabetizedTitles(): LiveData<List<Title>>
 
+
+
+
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(title: Title)
 
