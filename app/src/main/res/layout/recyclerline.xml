@@ -9,13 +9,13 @@
         android:id="@+id/title"
         android:layout_margin="10dp"
         android:textStyle="bold"
-        android:text="Terça-Feira"
+        android:text= "Line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
         android:id="@+id/notes"
-        android:text="Reunião"
+        android:text="Line2"
         android:layout_below="@id/title"
         android:layout_alignLeft="@+id/title"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/date"
-        android:text="24/02/20"
+        android:text="Line3"
         android:layout_alignTop="@id/date"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"

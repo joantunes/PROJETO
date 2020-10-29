@@ -9,25 +9,29 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 class AddCity : AppCompatActivity() {
-    private lateinit var cidadeText: EditText
-    private lateinit var notesText: EditText
-    private lateinit var dateText: EditText
+    private lateinit var text1: EditText
+    private lateinit var text2: EditText
+    private lateinit var text3: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_city)
-        cidadeText=findViewById(R.id.title)
-        notesText=findViewById(R.id.notes)
-        dateText=findViewById(R.id.date)
+        text1=findViewById(R.id.title)
+        text2=findViewById(R.id.notes)
+        text3=findViewById(R.id.date)
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
             val replyIntent = Intent()
-            if (TextUtils.isEmpty(notesText.text)) {
+            if (TextUtils.isEmpty(text1.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                replyIntent.putExtra(EXTRA_REPLY_TITLE, cidadeText.toString())
-                replyIntent.putExtra(EXTRA_REPLY_NOTES, notesText.toString())
-                replyIntent.putExtra(EXTRA_REPLY_DATE, dateText.toString())
+                val title = text1.text.toString()
+                val notes = text2.text.toString()
+                val date = text3.text.toString()
+
+                replyIntent.putExtra(EXTRA_REPLY_TITLE, title.toString())
+                replyIntent.putExtra(EXTRA_REPLY_NOTES, notes.toString())
+                replyIntent.putExtra(EXTRA_REPLY_DATE, date.toString())
 
 
                 setResult(Activity.RESULT_OK, replyIntent)

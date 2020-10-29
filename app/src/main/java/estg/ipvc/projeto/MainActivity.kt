@@ -29,11 +29,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = TitleAdapter(this)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         titleViewModel=ViewModelProvider(this).get(TitleViewModel::class.java)
         titleViewModel.allTitles.observe(this, Observer { titles ->

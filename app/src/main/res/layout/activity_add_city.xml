@@ -52,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"
             android:text="@string/button_save"
-            android:textColor="@color/buttonLabel" />
+            android:textColor="@color/buttonLabel"
+            app:backgroundTint="#554F4F" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
