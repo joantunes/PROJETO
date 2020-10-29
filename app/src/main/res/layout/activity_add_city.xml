@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-167dp"
-        tools:layout_editor_absoluteY="78dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="129dp">
 
         <EditText
             android:id="@+id/title"
@@ -23,6 +23,7 @@
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
+
         <EditText
             android:id="@+id/notes"
             android:layout_width="match_parent"
@@ -33,6 +34,7 @@
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
+
         <EditText
             android:id="@+id/date"
             android:layout_width="match_parent"

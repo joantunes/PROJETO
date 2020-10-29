@@ -8,18 +8,16 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import estg.ipvc.projeto.adapter.TitleAdapter
-import estg.ipvc.projeto.dataclasses.Place
 import estg.ipvc.projeto.entities.Title
 import estg.ipvc.projeto.viewModel.TitleViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var myList: ArrayList<Place>
+
     private lateinit var titleViewModel: TitleViewModel
     private val newWordActivityRequestCode = 1
 
@@ -31,8 +29,10 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = TitleAdapter(this)
-        recyclerView.adapter = adapter
+
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
 
 
         //VIEW MODEL
@@ -44,8 +44,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-        titleViewModel= ViewModelProvider(this).get(TitleViewModel::class.java)
-        titleViewModel.allTitles.observe(this,{ titles -> titles?.let { adapter.setTitles(it) }})
 
 
     }
