@@ -15,4 +15,11 @@ class TitleRepository(private val titleDao: TitleDao) {
         titleDao.insert(title)
 
     }
+    suspend fun deleteAll() {
+        titleDao.deleteAll()
+
+    }
+    suspend fun delete(title: Title) {
+        titleDao.delete(title)
+    }
 }

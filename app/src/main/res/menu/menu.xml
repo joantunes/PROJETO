@@ -6,14 +6,16 @@
     app:showAsAction="always">
 
 <menu>
-<item android:id="@+id/create_new"
-    android:title="@string/Insert"/>
+
 <item android:id="@+id/remove"
     android:title="@string/Remove"
     />
 <item android:id="@+id/edit"
     android:title="@string/Edit"
     />
+    <item android:id="@+id/removeX"
+        android:title="@string/removeX"
+        />
 </menu>
     </item>
 

@@ -83,23 +83,20 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when(item.itemId) {
-            R.id.create_new-> {
-                Toast.makeText(this, "Inserting..", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Inserir::class.java).apply {}
-                startActivity(intent)
-                true
-            }
             R.id.remove -> {
+                titleViewModel.deleteAll()
+                Toast.makeText(this, "Removed..", Toast.LENGTH_SHORT).show()
 
-                Toast.makeText(this, "Removing..", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Remover::class.java).apply {}
-                startActivity(intent)
                 true
             }
             R.id.edit -> {
-                Toast.makeText(this, "Editing..", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Editar::class.java).apply {}
-                startActivity(intent)
+
+                Toast.makeText(this, "Edited..", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.removeX->{
+                Toast.makeText(this, "Removed..", Toast.LENGTH_SHORT).show()
+                titleViewModel.deleteAll()
                 true
             }
             else -> super.onOptionsItemSelected(item)

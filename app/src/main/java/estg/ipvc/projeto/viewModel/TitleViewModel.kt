@@ -33,4 +33,13 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(title: Title) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(title)
     }
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO)
+    {
+        repository.deleteAll()
+    }
+
+    fun delete(title: Title) = viewModelScope.launch(Dispatchers.IO)
+    {
+        repository.delete(title)
+    }
 }

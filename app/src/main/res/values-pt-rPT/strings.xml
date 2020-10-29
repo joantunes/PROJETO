@@ -13,5 +13,6 @@
     <string name="Editing">Editando</string>
     <string name="hint_word">Palavra chave</string>
     <string name="button_save">Save</string>
+    <string name="removeX">Remover Certo Titulo</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
 </resources>
