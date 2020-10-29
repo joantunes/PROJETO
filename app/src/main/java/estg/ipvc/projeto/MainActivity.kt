@@ -8,6 +8,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,7 +35,11 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-
+        titleViewModel=ViewModelProvider(this).get(TitleViewModel::class.java)
+        titleViewModel.allTitles.observe(this, Observer { titles ->
+            // Update the cached copy of the words in the adapter.
+            titles?.let { adapter.setTitles(it) }
+        })
 
         //VIEW MODEL
 
