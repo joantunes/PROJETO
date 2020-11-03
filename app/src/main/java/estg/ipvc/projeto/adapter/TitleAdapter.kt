@@ -21,6 +21,8 @@ context: Context
         val TextView1 : TextView = itemView.title
         val TextView2 : TextView = itemView.notes
         val TextView3 : TextView = itemView.date
+       // val titleItemView: TextView = itemView.findViewById(R.id.textView)
+
 
     }
 
@@ -37,6 +39,7 @@ context: Context
         holder.TextView1.text =current.title
         holder.TextView2.text=current.notes
         holder.TextView3.text = current.date
+       // holder.titleItemView.text=current.id.toString()+ "-" + current.title+"-" + current.notes
 
     }
 

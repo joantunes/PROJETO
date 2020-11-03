@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.removeX->{
                 Toast.makeText(this, "Removed..", Toast.LENGTH_SHORT).show()
-                titleViewModel.deleteAll()
+                //titleViewModel.delete()
                 true
             }
             else -> super.onOptionsItemSelected(item)

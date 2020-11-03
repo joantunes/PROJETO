@@ -12,7 +12,8 @@ interface TitleDao {
     @Query("SELECT * from title_table ORDER BY title ASC")
     fun getAlphabetizedTitles(): LiveData<List<Title>>
 
-
+    //@Query("SELECT * from title_table WHERE notes==:notes")
+   // fun getTitlesByNotes(title: String): LiveData<notes>
 
 
 

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:hint="@string/hint_word"
+            android:hint="@string/hint_word2"
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:hint="@string/hint_word"
+            android:hint="@string/hint_word3"
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
