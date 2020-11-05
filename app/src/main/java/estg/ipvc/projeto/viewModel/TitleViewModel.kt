@@ -2,7 +2,6 @@ package estg.ipvc.projeto.viewModel
 
 
 import android.app.Application
-import android.widget.EditText
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -38,8 +37,10 @@ class TitleViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
-    fun deleteByTitle(title: EditText) = viewModelScope.launch(Dispatchers.IO)
+  /*  fun deleteByTitle(title: EditText) = viewModelScope.launch(Dispatchers.IO)
     {
         repository.deleteByTitle(title)
     }
+
+   */
 }

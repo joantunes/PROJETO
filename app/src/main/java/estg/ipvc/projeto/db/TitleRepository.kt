@@ -1,6 +1,5 @@
 package estg.ipvc.projeto.db
 
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import estg.ipvc.projeto.dao.TitleDao
 import estg.ipvc.projeto.entities.Title
@@ -20,7 +19,7 @@ class TitleRepository(private val titleDao: TitleDao) {
         titleDao.deleteAll()
 
     }
-    suspend fun deleteByTitle(title: EditText) {
-       titleDao.deleteByTitle(title)
-    }
+    //suspend fun deleteByTitle(title: EditText) {
+      // titleDao.deleteByTitle(title)
+    //}
 }

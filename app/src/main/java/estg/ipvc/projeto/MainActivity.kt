@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = TitleAdapter(this)
 
@@ -101,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 text1=findViewById(R.id.title)
                 val titulo = text1.text.toString()
                 Toast.makeText(this, "Removed $titulo..", Toast.LENGTH_SHORT).show()
-               titleViewModel.deleteByTitle(text1)
+              // titleViewModel.deleteByTitle(text1)
                 true
             }
             else -> super.onOptionsItemSelected(item)
