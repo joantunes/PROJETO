@@ -1,21 +1,25 @@
 package estg.ipvc.projeto.dao
 
+import android.widget.EditText
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import estg.ipvc.projeto.entities.Title
 
 @Dao
 interface TitleDao {
     @Query("SELECT * from title_table ORDER BY title ASC")
-    fun getAlphabetizedTitles(): LiveData<List<Title>>
+    fun getAllTitles(): LiveData<List<Title>>
+
+
+    @Query("DELETE  FROM title_table WHERE title==:title")
+    suspend fun deleteByTitle(title: EditText)
+
 
     //@Query("SELECT * from title_table WHERE notes==:notes")
    // fun getTitlesByNotes(title: String): LiveData<notes>
 
-
+    @Update
+    suspend fun updateTitle(title: Title)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(title: Title)
@@ -23,6 +27,6 @@ interface TitleDao {
     @Query("DELETE FROM title_table")
     suspend fun deleteAll()
 
-    @Query("DELETE FROM title_table WHERE title ==:title")
-    suspend fun delete(title: Title)
+   // @Query("DELETE FROM title_table WHERE title ==:title")
+    //suspend fun delete(title: Title)
 }

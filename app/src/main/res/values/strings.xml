@@ -14,6 +14,7 @@
     <string name="hint_word2">Note</string>
     <string name="hint_word3">Date</string>
     <string name="button_save">Save</string>
+    <string name="button_delete">Delete</string>
     <string name="removeX">Remove Certain Title</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -19,7 +20,7 @@ import estg.ipvc.projeto.viewModel.TitleViewModel
 
 class MainActivity : AppCompatActivity() {
 
-
+    private lateinit var text1: EditText
     private lateinit var titleViewModel: TitleViewModel
     private val newWordActivityRequestCode = 1
 
@@ -95,8 +96,12 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.removeX->{
-                Toast.makeText(this, "Removed..", Toast.LENGTH_SHORT).show()
-                //titleViewModel.delete()
+                val intent = Intent(this@MainActivity, Remover::class.java)
+                startActivityForResult(intent, newWordActivityRequestCode)
+                text1=findViewById(R.id.title)
+                val titulo = text1.text.toString()
+                Toast.makeText(this, "Removed $titulo..", Toast.LENGTH_SHORT).show()
+               titleViewModel.deleteByTitle(text1)
                 true
             }
             else -> super.onOptionsItemSelected(item)
