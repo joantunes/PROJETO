@@ -23,11 +23,7 @@ class TitleAdapter internal constructor(
 
     inner class TitleViewHolder(val view: View) : RecyclerView.ViewHolder(view),
             View.OnClickListener {
-        init {
-            view.setOnClickListener{
-                println("TEST")
-            }
-        }
+
         val TextView1: TextView = itemView.title
         val TextView2: TextView = itemView.notes
 

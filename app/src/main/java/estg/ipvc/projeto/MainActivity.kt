@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        titleViewModel=ViewModelProvider(this).get(TitleViewModel::class.java)
+        titleViewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
         titleViewModel.allTitles.observe(this, Observer { titles ->
             // Update the cached copy of the words in the adapter.
             titles?.let { adapter.setTitles(it) }
@@ -57,7 +57,10 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
             val itemTouchHelperCallback: ItemTouchHelper.SimpleCallback =
                 object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+
                     override fun onMove(
+
                         recyclerView: RecyclerView,
                         viewHolder: RecyclerView.ViewHolder,
                         target: RecyclerView.ViewHolder
@@ -69,6 +72,7 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                         // Row is swiped from recycler view
                         // remove it from adapter
                         //adapter.notifyItemRemoved(viewHolder.adapterPosition);
+
                         adapter.getTitleAt(viewHolder.adapterPosition)?.let {
                             titleViewModel.delete(
                                 it
@@ -93,10 +97,13 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                         // Row is swiped from recycler view
                         // remove it from adapter
                         //adapter.notifyItemRemoved(viewHolder.adapterPosition);
+
                         adapter.getTitleAt(viewHolder.adapterPosition)?.let {
-                            val intent = Intent(this@MainActivity,Editar::class.java)
+                            val intent = Intent(this@MainActivity, Editar::class.java)
+                            startActivityForResult(intent,newWordActivityRequestCode)
+
                             titleViewModel.update(
-                                it
+                            it
                             )
                         }
 
@@ -110,10 +117,7 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
             ItemTouchHelper(itemTouchHelperCallback2).attachToRecyclerView(recyclerView)
 
 
-
-
-    }
-
+        }
 
 
     }
@@ -155,7 +159,8 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                 true
             }
             R.id.edit -> {
-
+                val intent = Intent(this@MainActivity, Editar::class.java)
+                startActivityForResult(intent, newWordActivityRequestCode)
                 Toast.makeText(this, "Edited..", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -188,3 +193,4 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
 
 }
+

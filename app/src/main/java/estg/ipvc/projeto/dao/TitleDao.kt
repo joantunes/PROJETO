@@ -16,8 +16,7 @@ interface TitleDao {
     //@Query("SELECT * from title_table WHERE notes==:notes")
    // fun getTitlesByNotes(title: String): LiveData<notes>
 
-    @Update
-    suspend fun updateTitle(title: Title)
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(title: Title)
@@ -29,10 +28,8 @@ interface TitleDao {
     fun delete(title: Title?)
 
     @Update
-    fun update(title: Title)
+    fun update(title: Title?)
 
 
 
-    // @Query("DELETE FROM title_table WHERE title ==:title")
-    //suspend fun delete(title: Title)
 }
