@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,20 +19,25 @@ import estg.ipvc.projeto.adapter.TitleAdapter
 import estg.ipvc.projeto.entities.Title
 import estg.ipvc.projeto.viewModel.TitleViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
     private lateinit var text1: EditText
     private lateinit var titleViewModel: TitleViewModel
     private val newWordActivityRequestCode = 1
+    private val adapter = TitleAdapter(this,this)
+    private var titles = emptyList<Title>()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = TitleAdapter(this)
 
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+
+        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -49,11 +55,71 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, AddCity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
 
+            val itemTouchHelperCallback: ItemTouchHelper.SimpleCallback =
+                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        // Row is swiped from recycler view
+                        // remove it from adapter
+                        //adapter.notifyItemRemoved(viewHolder.adapterPosition);
+                        adapter.getTitleAt(viewHolder.adapterPosition)?.let {
+                            titleViewModel.delete(
+                                it
+                            )
+                        }
+
+                    }
+
+
+                }
+            val itemTouchHelperCallback2: ItemTouchHelper.SimpleCallback =
+                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        // Row is swiped from recycler view
+                        // remove it from adapter
+                        //adapter.notifyItemRemoved(viewHolder.adapterPosition);
+                        adapter.getTitleAt(viewHolder.adapterPosition)?.let {
+                            val intent = Intent(this@MainActivity,Editar::class.java)
+                            titleViewModel.update(
+                                it
+                            )
+                        }
+
+                    }
+
+
+                }
+
+// attaching the touch helper to recycler view
+            ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
+            ItemTouchHelper(itemTouchHelperCallback2).attachToRecyclerView(recyclerView)
+
+
+
+
     }
 
 
 
     }
+
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -110,5 +176,15 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.menu, menu)
         return true
     }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
+       // val clikedItem =titles[position]
+        //clikedItem.s
+        //startActivity(Intent(this@TitleAdpater,Remover::class.java))
+        //adapter.notifyItemChanged(position)
+
+    }
+
 
 }

@@ -19,6 +19,14 @@ class TitleRepository(private val titleDao: TitleDao) {
         titleDao.deleteAll()
 
     }
+    suspend fun delete(title: Title?){
+        titleDao.delete(title)
+    }
+    suspend fun update(title: Title?){
+        if (title != null) {
+            titleDao.update(title)
+        }
+    }
     //suspend fun deleteByTitle(title: EditText) {
       // titleDao.deleteByTitle(title)
     //}
