@@ -17,7 +17,7 @@ class TitleAdapter internal constructor(
 
 
 ) : RecyclerView.Adapter<TitleAdapter.TitleViewHolder>() {
-   private var titles = emptyList<Title>()
+    private var titles = emptyList<Title>()
 
 
 
@@ -60,8 +60,8 @@ class TitleAdapter internal constructor(
         holder.TextView1.text =current.title
         holder.TextView2.text=current.notes
         holder.TextView3.text = current.date
-       // holder.titleItemView.text=current.id.toString()+ "-" + current.title+"-" + current.note
-       }
+        // holder.titleItemView.text=current.id.toString()+ "-" + current.title+"-" + current.note
+    }
 
 
 

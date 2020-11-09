@@ -56,61 +56,61 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
             startActivityForResult(intent, newWordActivityRequestCode)
 
             val itemTouchHelperCallback: ItemTouchHelper.SimpleCallback =
-                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                    object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
 
-                    override fun onMove(
+                        override fun onMove(
 
-                        recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        // Row is swiped from recycler view
-                        // remove it from adapter
-                        //adapter.notifyItemRemoved(viewHolder.adapterPosition);
-
-                        adapter.getTitleAt(viewHolder.adapterPosition)?.let {
-                            titleViewModel.delete(
-                                it
-                            )
+                                recyclerView: RecyclerView,
+                                viewHolder: RecyclerView.ViewHolder,
+                                target: RecyclerView.ViewHolder
+                        ): Boolean {
+                            return false
                         }
 
+                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                            // Row is swiped from recycler view
+                            // remove it from adapter
+                            //adapter.notifyItemRemoved(viewHolder.adapterPosition);
+
+                            adapter.getTitleAt(viewHolder.adapterPosition)?.let {
+                                titleViewModel.delete(
+                                        it
+                                )
+                            }
+
+                        }
+
+
                     }
-
-
-                }
             val itemTouchHelperCallback2: ItemTouchHelper.SimpleCallback =
-                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-                    override fun onMove(
-                        recyclerView: RecyclerView,
-                        viewHolder: RecyclerView.ViewHolder,
-                        target: RecyclerView.ViewHolder
-                    ): Boolean {
-                        return false
-                    }
-
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                        // Row is swiped from recycler view
-                        // remove it from adapter
-                        //adapter.notifyItemRemoved(viewHolder.adapterPosition);
-
-                        adapter.getTitleAt(viewHolder.adapterPosition)?.let {
-                            val intent = Intent(this@MainActivity, Editar::class.java)
-                            startActivityForResult(intent,newWordActivityRequestCode)
-
-                            titleViewModel.update(
-                            it
-                            )
+                    object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                        override fun onMove(
+                                recyclerView: RecyclerView,
+                                viewHolder: RecyclerView.ViewHolder,
+                                target: RecyclerView.ViewHolder
+                        ): Boolean {
+                            return false
                         }
 
+                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                            // Row is swiped from recycler view
+                            // remove it from adapter
+                            //adapter.notifyItemRemoved(viewHolder.adapterPosition);
+
+                            adapter.getTitleAt(viewHolder.adapterPosition)?.let {
+                                val intent = Intent(this@MainActivity, Editar::class.java)
+                                startActivityForResult(intent,newWordActivityRequestCode)
+
+                                titleViewModel.update(
+                                        it
+                                )
+                            }
+
+                        }
+
+
                     }
-
-
-                }
 
 // attaching the touch helper to recycler view
             ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
@@ -141,9 +141,9 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
         }
         else {
             Toast.makeText(
-                applicationContext,
-               "Titulo vazio!",
-                Toast.LENGTH_LONG).show()
+                    applicationContext,
+                    "Titulo vazio!",
+                    Toast.LENGTH_LONG).show()
         }
     }
 
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                 text1=findViewById(R.id.title)
                 val titulo = text1.text.toString()
                 Toast.makeText(this, "Removed $titulo..", Toast.LENGTH_SHORT).show()
-              // titleViewModel.deleteByTitle(text1)
+                // titleViewModel.deleteByTitle(text1)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
     override fun onItemClick(position: Int) {
         Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
-       // val clikedItem =titles[position]
+        // val clikedItem =titles[position]
         //clikedItem.s
         //startActivity(Intent(this@TitleAdpater,Remover::class.java))
         //adapter.notifyItemChanged(position)

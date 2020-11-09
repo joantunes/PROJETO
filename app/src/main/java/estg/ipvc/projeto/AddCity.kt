@@ -39,10 +39,10 @@ class AddCity : AppCompatActivity() {
             finish()
         }
     }
-        companion object {
-            const val EXTRA_REPLY_TITLE= "ipvc.estg.projeto.title"
-            const val EXTRA_REPLY_NOTES = "ipvc.estg.projeto.notes"
-            const val EXTRA_REPLY_DATE = "ipvc.estg.projeto.date"
+    companion object {
+        const val EXTRA_REPLY_TITLE= "ipvc.estg.projeto.title"
+        const val EXTRA_REPLY_NOTES = "ipvc.estg.projeto.notes"
+        const val EXTRA_REPLY_DATE = "ipvc.estg.projeto.date"
 
-        }
+    }
 }

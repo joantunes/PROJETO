@@ -17,7 +17,7 @@ public abstract class TitleDB : RoomDatabase() {
     abstract fun titleDao(): TitleDao
 
     private class WordDataBaseCallback(
-        private val scope: CoroutineScope
+            private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
@@ -51,14 +51,14 @@ public abstract class TitleDB : RoomDatabase() {
             }
             synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    TitleDB::class.java,
-                    "titles_database",
+                        context.applicationContext,
+                        TitleDB::class.java,
+                        "titles_database",
                 )
-                    //estratégia de destrução
-                    .fallbackToDestructiveMigration()
-                    .addCallback(WordDataBaseCallback(scope))
-                    .build()
+                        //estratégia de destrução
+                        .fallbackToDestructiveMigration()
+                        .addCallback(WordDataBaseCallback(scope))
+                        .build()
                 INSTANCE = instance
                 return instance
             }
