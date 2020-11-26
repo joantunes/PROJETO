@@ -3,10 +3,11 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    xmlns:android="http://schemas.android.com/apk/res/android" >
     <TextView
         android:id="@+id/title"
+        android:textColor="@color/white"
         android:layout_margin="10dp"
         android:textStyle="bold"
         android:text= "Line1"
@@ -15,6 +16,7 @@
 
     <TextView
         android:id="@+id/notes"
+        android:textColor="@color/white"
         android:text="Line2"
         android:layout_below="@id/title"
         android:layout_alignLeft="@+id/title"
@@ -23,6 +25,7 @@
 
     <TextView
         android:id="@+id/date"
+        android:textColor="@color/white"
         android:text="Line3"
         android:layout_alignTop="@id/date"
         android:layout_alignParentRight="true"

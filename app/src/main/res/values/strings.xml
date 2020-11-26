@@ -18,4 +18,9 @@
     <string name="button_edit" translatable="false">Edit</string>
     <string name="removeX">Remove Certain Title</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="Login" translatable="false">Login</string>
+    <string name="registar" translatable="false">Register Now</string>
+    <string name="user" translatable="false">User</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
 </resources>

@@ -16,8 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import estg.ipvc.projeto.adapter.TitleAdapter
+//import estg.ipvc.projeto.adapter.UserAdapter
+import estg.ipvc.projeto.api.EndPoints
+import estg.ipvc.projeto.api.ServiceBuilder
 import estg.ipvc.projeto.entities.Title
 import estg.ipvc.projeto.viewModel.TitleViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
@@ -34,12 +42,26 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getUsers()
+
+        call.enqueue(object : Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                if (response.isSuccessful) {
+                    recyclerview.apply {
+                        setHasFixedSize(true)
+                        layoutManager = LinearLayoutManager(this@MainActivity)
+                       // adapter = UserAdapter(response.body()!!)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
 
         titleViewModel = ViewModelProvider(this).get(TitleViewModel::class.java)
@@ -74,6 +96,8 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                             //adapter.notifyItemRemoved(viewHolder.adapterPosition);
 
                             adapter.getTitleAt(viewHolder.adapterPosition)?.let {
+                                val position : Int = viewHolder.adapterPosition
+                                Toast.makeText(this@MainActivity,"You removed item # ${position+1}", Toast.LENGTH_SHORT).show()
                                 titleViewModel.delete(
                                         it
                                 )
@@ -99,6 +123,8 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                             //adapter.notifyItemRemoved(viewHolder.adapterPosition);
 
                             adapter.getTitleAt(viewHolder.adapterPosition)?.let {
+                                val position : Int = viewHolder.adapterPosition
+                                Toast.makeText(this@MainActivity,"You edited item # ${position+1}", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this@MainActivity, Editar::class.java)
                                 startActivityForResult(intent,newWordActivityRequestCode)
 
@@ -113,8 +139,8 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                     }
 
 // attaching the touch helper to recycler view
-            ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
-            ItemTouchHelper(itemTouchHelperCallback2).attachToRecyclerView(recyclerView)
+            ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerview)
+            ItemTouchHelper(itemTouchHelperCallback2).attachToRecyclerView(recyclerview)
 
 
         }
