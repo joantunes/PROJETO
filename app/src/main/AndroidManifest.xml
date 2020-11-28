@@ -31,15 +31,14 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Login"
             android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".notepad" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AddCity" />
         <activity android:name=".Remover" />
         <activity android:name=".Editar" />
         <activity android:name=".Inserir" />
-        <activity android:name=".Login">
+        <activity android:name=".MapsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
