@@ -38,14 +38,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (response.isSuccessful) {
                     users = response.body()!!
                     for (user in users) {
-                        position = LatLng(problems.
-                        user.address.geo.lng.toString().toDouble())
-                        mMap.addMarker(MarkerOptions().position(position).title(user.address.suite + " - " + user . address . city))
+                        position = LatLng(problems.lat.toString().toDouble(), problems.lng.toString().toDouble())
+                        mMap.addMarker(MarkerOptions().position(position).title(problems.descr + " - " + problems.city))
+
+
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            override fun onFailure(call: Call<List<user>>, t: Throwable) {
                 Toast.makeText(this@MapsActivity,"${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

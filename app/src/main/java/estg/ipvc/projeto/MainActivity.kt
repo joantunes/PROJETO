@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getUsers()
 
-        call.enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+        call.enqueue(object : Callback<List<user>> {
+            override fun onResponse(call: Call<List<user>>, response: Response<List<user>>) {
                 if (response.isSuccessful) {
                     recyclerview.apply {
                         setHasFixedSize(true)
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                 }
             }
 
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            override fun onFailure(call: Call<List<user>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

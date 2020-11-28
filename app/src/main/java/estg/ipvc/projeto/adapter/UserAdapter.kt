@@ -7,4 +7,4 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import estg.ipvc.projeto.R
-import estg.ipvc.projeto.User
+import estg.ipvc.projeto.user

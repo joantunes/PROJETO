@@ -8,8 +8,10 @@ data class user(
 data class problems(
     val id: Int,
     val descr: String,
-    val lat: Float,
-    val lng: Float,
-    val userID: Int
+    val lat: String,
+    val lng: String,
+    val userID: Int,
+    val rua: String,
+    val city: String
 )
 

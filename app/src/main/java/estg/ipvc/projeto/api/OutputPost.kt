@@ -1,6 +1,8 @@
 package estg.ipvc.projeto.api
 
-class OutputPost {
+class OutputPost (
+    val success: Boolean,
+    var title: String
+)
 
 
-}
