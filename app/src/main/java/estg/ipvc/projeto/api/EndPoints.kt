@@ -13,6 +13,13 @@ interface EndPoints  {
     fun getUserById(@Path("id") id: Int): Call<user>
 
 
+    @GET("/mySlim/api/logins")
+    fun getProblemLat(@Path("lat") lat: String  ): Call<user>
+
+    @GET("/mySlim/api/logins")
+    fun getProblemLng(@Path("lng") lng: String  ): Call<user>
+
+
     @FormUrlEncoded
     @POST("/mySlim/api/post")
     fun postIN(@Field("userName") userName: String?, //FUNCAO POST LOGIN

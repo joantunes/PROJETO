@@ -35,10 +35,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var position: LatLng
         call.enqueue(object : Callback<List<user>> {
                 override fun onResponse(call: Call<List<user>>, response: Response<List<user>>) {
+
                 if (response.isSuccessful) {
                     users = response.body()!!
                     for (user in users) {
-                        position = LatLng(problems.lat.toString().toDouble(), problems.lng.toString().toDouble())
+                        position = LatLng(problems.lat.toDouble(), problems.lng.toDouble())
                         mMap.addMarker(MarkerOptions().position(position).title(problems.descr + " - " + problems.city))
 
 
