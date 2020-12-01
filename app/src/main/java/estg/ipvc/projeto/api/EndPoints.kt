@@ -1,6 +1,7 @@
 package estg.ipvc.projeto.api
 
 
+import estg.ipvc.projeto.problems
 import estg.ipvc.projeto.user
 import retrofit2.Call
 import retrofit2.http.*
@@ -14,10 +15,7 @@ interface EndPoints  {
 
 
     @GET("/mySlim/api/logins")
-    fun getProblemLat(@Path("lat") lat: String  ): Call<user>
-
-    @GET("/mySlim/api/logins")
-    fun getProblemLng(@Path("lng") lng: String  ): Call<user>
+    fun getProblems(): Call<List<problems>>
 
 
     @FormUrlEncoded

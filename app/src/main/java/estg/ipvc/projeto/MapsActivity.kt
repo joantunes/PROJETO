@@ -1,8 +1,10 @@
 package estg.ipvc.projeto
 
+import android.location.Location
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -18,7 +20,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var users: List<user>
-    private lateinit var problems: problems
+    private lateinit var Problems: List<problems>
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +37,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         ///////////CALL MAPS
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getUsers()
+        val call = request.getProblems()
         var position: LatLng
-        call.enqueue(object : Callback<List<user>> {
-                override fun onResponse(call: Call<List<user>>, response: Response<List<user>>) {
+        call.enqueue(object : Callback<List<problems>> {
+                override fun onResponse(call: Call<List<problems>>, response: Response<List<problems>>) {
 
                 if (response.isSuccessful) {
-                    users = response.body()!!
-                    for (user in users) {
+                    Problems = response.body()!!
+                    for (problems in Problems) {
                         position = LatLng(problems.lat.toDouble(), problems.lng.toDouble())
                         mMap.addMarker(MarkerOptions().position(position).title(problems.descr + " - " + problems.city))
 
@@ -47,7 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
 
-            override fun onFailure(call: Call<List<user>>, t: Throwable) {
+            override fun onFailure(call: Call<List<problems>>, t: Throwable) {
                 Toast.makeText(this@MapsActivity,"${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
@@ -72,3 +78,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 }
+
