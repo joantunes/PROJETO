@@ -1,5 +1,6 @@
 package estg.ipvc.projeto
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import estg.ipvc.projeto.api.EndPoints
 import estg.ipvc.projeto.api.ServiceBuilder
 import retrofit2.Call
@@ -35,12 +37,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         call.enqueue(object : Callback<List<problems>> {
             override fun onResponse(call: Call<List<problems>>, response: Response<List<problems>>) {
-                if (response.isSuccessful) {     // Em caso de sucesso
-                    problems = response.body()!! // igualar a lista de problemas
+                if (response.isSuccessful) {
+                    problems = response.body()!!
                     for (problem in problems) {
-                        position = LatLng(problem.lat.toDouble(), //latlng precisa de recerber um double da longitude e latitude
+                        position = LatLng(problem.lat.toDouble(), 
                                 problem.lng.toDouble())
-                        mMap.addMarker(MarkerOptions().position(position).title(problem.descr + " - " + problem.city))
+                        mMap.addMarker(MarkerOptions().position(position).title(problem.userID.toString() + " " + problem.descr + " - " + problem.city))
 
                     }
                 }
@@ -50,7 +52,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this@MapsActivity, AddCity::class.java)
+            startActivity(intent)
+        }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
 
