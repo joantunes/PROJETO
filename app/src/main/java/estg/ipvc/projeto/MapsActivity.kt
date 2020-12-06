@@ -20,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import estg.ipvc.projeto.api.EndPoints
 import estg.ipvc.projeto.api.ServiceBuilder
@@ -34,6 +35,7 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
     private lateinit var problems: List<problems>
 
     private var userID:Int=0
+    private lateinit var x: Marker
     // add to implement last known location
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -84,16 +86,18 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
                         position = LatLng(problem.lat.toDouble(),
                                 problem.lng.toDouble())
-                        mMap.addMarker(
-                                MarkerOptions()
-                                        .position(position).title(problem.userID.toString() + " " + problem.descr)
 
+                         x = mMap.addMarker(
+                                        MarkerOptions()
+                                        .position(position).title(problem.userID.toString() + " " + problem.descr))
+                        x.tag=problem.userID
 
-                        )
 
 
                     }
                 }
+
+
             }
 
             override fun onFailure(call: Call<List<problems>>, t: Throwable) {
@@ -152,11 +156,6 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        mMap.setOnMarkerClickListener {
-
-
-
-        true}
 
         setUpMap()
     }
@@ -240,6 +239,13 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
                 intent.putExtra("longitude", lng)
                 startActivity(intent)
 
+                true
+            }
+            R.id.delete-> {
+                if(x=userID)
+                {
+
+                }
                 true
             }
 
