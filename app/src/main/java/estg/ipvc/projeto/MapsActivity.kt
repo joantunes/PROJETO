@@ -33,6 +33,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var problems: List<problems>
 
+    private var userID:Int=0
     // add to implement last known location
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -63,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getProblems()
         var position: LatLng
-
+        userID =  intent.getIntExtra("id_user",0)
 
 
         //added to implement distance between two locations
@@ -85,6 +86,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         mMap.addMarker(
                                 MarkerOptions()
                                         .position(position).title(problem.userID.toString() + " " + problem.descr)
+
 
                         )
 

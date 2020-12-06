@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -176,32 +177,33 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
 
 
-  /*  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when(item.itemId) {
-
-            R.id.removeX->{
-                val intent = Intent(this@MainActivity, Remover::class.java)
-                startActivityForResult(intent, newWordActivityRequestCode)
-                text1=findViewById(R.id.title)
-                val titulo = text1.text.toString()
-                Toast.makeText(this, "Removed $titulo..", Toast.LENGTH_SHORT).show()
-                // titleViewModel.deleteByTitle(text1)
+            R.id.create_new-> {
+                Toast.makeText(this, "Inserting..", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Inserir::class.java).apply {}
+                startActivity(intent)
                 true
             }
-            R.id.adiconar->{
-                val intent = Intent(this@MainActivity, AddCity::class.java)
+            R.id.remove -> {
+                Toast.makeText(this, "Removing..", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Remover::class.java).apply {}
                 startActivity(intent)
-
-
+                true
+            }
+            R.id.edit -> {
+                Toast.makeText(this, "Editing..", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Editar::class.java).apply {}
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }*/
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
+        inflater.inflate(R.menu.menu1, menu)
         return true
     }
 

@@ -85,7 +85,7 @@
         android:id="@+id/buttonRegister"
         android:layout_width="272dp"
         android:layout_height="44dp"
-        android:text="Map Now!"
+        android:text="Note Now!"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -23,8 +23,8 @@ class add_marker : AppCompatActivity() {
 
         var latitude= intent.getStringExtra("latitude")
         var longitude= intent.getStringExtra("longitude")
-        var token2 = getSharedPreferences("id", Context.MODE_PRIVATE)
-        userID=token2.getInt("id_atual", 0)
+        var token = getSharedPreferences("id", Context.MODE_PRIVATE)
+        userID=token.getInt("id_atual", 0)
 
         findViewById<TextView>(R.id.lat).setText(latitude)         // coloca valor da latitude no campo Lat do XML
         findViewById<TextView>(R.id.lng).setText(longitude)          // coloca valor da latitude no campo Lat do XML

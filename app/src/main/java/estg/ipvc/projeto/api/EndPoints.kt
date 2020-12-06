@@ -16,12 +16,16 @@ interface EndPoints  {
 
     @GET("/mySlim/api/logins")
     fun getProblems(): Call<List<problems>>
+
+
     @FormUrlEncoded
     @POST("/mySlim/api/marker")
     fun postMarker(@Field("descr") descr: String?, //FUNCAO POST LOGIN
                @Field("lat") lat: String?,
                 @Field("lng") lng: String?,
                 @Field("userID") userID: Int): Call<OutputPost>
+
+
     @FormUrlEncoded
     @POST("/mySlim/api/post")
     fun postIN(@Field("userName") userName: String?, //FUNCAO POST LOGIN

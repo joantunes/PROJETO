@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
-    private  var id: Int=0
+    private  var idUser: Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -23,6 +23,7 @@ class Login : AppCompatActivity() {
             val intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
 
     }
 
@@ -36,8 +37,7 @@ class Login : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<OutputPost> {
             override fun onResponse(call: Call<OutputPost>, response: Response<OutputPost>) {
-                if (response.body()?.success == false) {
-                    val x: OutputPost = response.body()!!
+                if (response.body()?.success==0) {
                     Toast.makeText(
                             this@Login,
                             "Login Incorreto. User ou Password incorretos.",
@@ -47,9 +47,10 @@ class Login : AppCompatActivity() {
 
                 } else {
                     val x: OutputPost = response.body()!!
-                    id=x.id
+                    idUser=x.id.toInt()
+                    intent.putExtra("id_user",idUser)
                     val intent = Intent(this@Login, MapsActivity::class.java)
-                    Toast.makeText(this@Login, "Login Correto", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Login, "Login Correto"+ x.id, Toast.LENGTH_SHORT).show()
                     startActivity(intent)
 
                     var token = getSharedPreferences("user", Context.MODE_PRIVATE)  //
@@ -57,7 +58,7 @@ class Login : AppCompatActivity() {
                     var editor = token.edit()
                     var editor2 = token2.edit()
                     editor.putString("user_atual",user)
-                    editor2.putInt("id_atual",id)
+                    editor2.putInt("id_atual",idUser)
 
 
                     editor.commit()
