@@ -28,7 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var problems: List<problems>
@@ -64,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getProblems()
         var position: LatLng
-        userID =  intent.getIntExtra("id_user",0)
+        userID =  intent.getIntExtra("id_user", 0)
 
 
         //added to implement distance between two locations
@@ -81,6 +81,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (response.isSuccessful) {
                     problems = response.body()!!
                     for (problem in problems) {
+
                         position = LatLng(problem.lat.toDouble(),
                                 problem.lng.toDouble())
                         mMap.addMarker(
@@ -89,6 +90,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
                         )
+
 
                     }
                 }
@@ -150,6 +152,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setOnMarkerClickListener {
+
+
+
+        true}
 
         setUpMap()
     }
@@ -221,16 +228,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             R.id.logout -> {
                 var token = getSharedPreferences("user", Context.MODE_PRIVATE)
                 var editor = token.edit()
-                editor.putString("user_atual"," ")
+                editor.putString("user_atual", " ")
                 editor.commit()
                 val intent = Intent(this@MapsActivity, Login::class.java)
                 startActivity(intent)
                 true
             }
-            R.id.add->{
+            R.id.add -> {
                 val intent = Intent(this@MapsActivity, add_marker::class.java)
-                intent.putExtra("latitude",lat)
-                intent.putExtra("longitude",lng)
+                intent.putExtra("latitude", lat)
+                intent.putExtra("longitude", lng)
                 startActivity(intent)
 
                 true
@@ -240,6 +247,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
+
 
 
 }
