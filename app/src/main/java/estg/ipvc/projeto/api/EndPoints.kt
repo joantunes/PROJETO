@@ -17,6 +17,9 @@ interface EndPoints  {
     @GET("/mySlim/api/logins")
     fun getProblems(): Call<List<problems>>
 
+    @GET("/mySlim/api/delete")
+    fun delete(): Call<List<problems>>
+
 
     @FormUrlEncoded
     @POST("/mySlim/api/marker")
