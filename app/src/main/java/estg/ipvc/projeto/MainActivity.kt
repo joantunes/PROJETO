@@ -1,11 +1,11 @@
 package estg.ipvc.projeto
 
+//import estg.ipvc.projeto.adapter.UserAdapter
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import estg.ipvc.projeto.adapter.TitleAdapter
-//import estg.ipvc.projeto.adapter.UserAdapter
 import estg.ipvc.projeto.api.EndPoints
 import estg.ipvc.projeto.api.ServiceBuilder
 import estg.ipvc.projeto.entities.Title
@@ -177,21 +176,10 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
 
 
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+  /*  override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when(item.itemId) {
-            R.id.remove -> {
-                titleViewModel.deleteAll()
-                Toast.makeText(this, "Removed..", Toast.LENGTH_SHORT).show()
 
-                true
-            }
-            R.id.edit -> {
-                val intent = Intent(this@MainActivity, Editar::class.java)
-                startActivityForResult(intent, newWordActivityRequestCode)
-                Toast.makeText(this, "Edited..", Toast.LENGTH_SHORT).show()
-                true
-            }
             R.id.removeX->{
                 val intent = Intent(this@MainActivity, Remover::class.java)
                 startActivityForResult(intent, newWordActivityRequestCode)
@@ -201,9 +189,16 @@ class MainActivity : AppCompatActivity(), TitleAdapter.OnItemClickListener{
                 // titleViewModel.deleteByTitle(text1)
                 true
             }
+            R.id.adiconar->{
+                val intent = Intent(this@MainActivity, AddCity::class.java)
+                startActivity(intent)
+
+
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    }*/
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)

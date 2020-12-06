@@ -1,5 +1,6 @@
 package estg.ipvc.projeto
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
+    private  var id: Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -23,6 +25,7 @@ class Login : AppCompatActivity() {
         }
 
     }
+
 
     fun login(view: View) {
 
@@ -43,9 +46,25 @@ class Login : AppCompatActivity() {
 
 
                 } else {
+                    val x: OutputPost = response.body()!!
+                    id=x.id
                     val intent = Intent(this@Login, MapsActivity::class.java)
                     Toast.makeText(this@Login, "Login Correto", Toast.LENGTH_SHORT).show()
                     startActivity(intent)
+
+                    var token = getSharedPreferences("user", Context.MODE_PRIVATE)  //
+                    var token2 = getSharedPreferences("id", Context.MODE_PRIVATE)  //
+                    var editor = token.edit()
+                    var editor2 = token2.edit()
+                    editor.putString("user_atual",user)
+                    editor2.putInt("id_atual",id)
+
+
+                    editor.commit()
+                    editor2.commit()
+
+
+
                 }
 
             }
@@ -53,6 +72,22 @@ class Login : AppCompatActivity() {
             override fun onFailure(call: Call<OutputPost>, t: Throwable) {
                 Toast.makeText(this@Login, "${t.message}", Toast.LENGTH_SHORT).show()
             }
+
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        var token = getSharedPreferences("user", Context.MODE_PRIVATE)
+        if(token.getString("user_atual"," ") != " ") {
+
+
+            val intent = Intent(this@Login, MapsActivity::class.java)
+
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            startActivity(intent)
+        }
+
     }
 }

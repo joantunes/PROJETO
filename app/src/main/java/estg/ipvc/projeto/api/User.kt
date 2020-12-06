@@ -10,8 +10,6 @@ data class problems(
     val descr: String,
     val lat: String,
     val lng: String,
-    val userID: Int,
-    val rua: String,
-    val city: String
+    val userID: Int
 )
 
