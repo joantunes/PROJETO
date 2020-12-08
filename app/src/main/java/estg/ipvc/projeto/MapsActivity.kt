@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import estg.ipvc.projeto.api.EndPoints
+import estg.ipvc.projeto.api.OutputPost
 import estg.ipvc.projeto.api.ServiceBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +36,8 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
     private lateinit var problems: List<problems>
 
     private var userID:Int=0
+    private var userIDprob:Int=0
+
     private lateinit var x: Marker
     // add to implement last known location
     private lateinit var lastLocation: Location
@@ -90,7 +93,7 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
                          x = mMap.addMarker(
                                         MarkerOptions()
                                         .position(position).title(problem.userID.toString() + " " + problem.descr))
-                        x.tag=problem.userID
+                        x.tag=problem.id
 
 
 
@@ -158,6 +161,42 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
         mMap = googleMap
 
         setUpMap()
+        mMap.setOnMarkerClickListener {
+            val intent = Intent(this@MapsActivity, remove_marker::class.java)
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val idProblema = it.tag
+
+            val call = request.postON(idProblema as Int)
+            call.enqueue(object : Callback<OutputPost> {
+
+                override fun onResponse(call: Call<OutputPost>, response: Response<OutputPost>) {
+
+                    if (response.isSuccessful) {
+                      val a : OutputPost=response.body()!!
+                        userIDprob=a.userID
+                        Toast.makeText(this@MapsActivity,"dados:"+userIDprob, Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+                override fun onFailure(call: Call<OutputPost>, t: Throwable) {
+                    Toast.makeText(this@MapsActivity, "Erro", Toast.LENGTH_SHORT).show()
+                }
+            })
+            if (userIDprob==userID)
+            {
+                intent.putExtra("idProblema",idProblema)
+                startActivity(intent)
+
+            }
+            else
+            {
+                Toast.makeText(this@MapsActivity, "Este marker não é seu", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+            true
+        }
     }
 
 
@@ -241,13 +280,7 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
                 true
             }
-            R.id.delete-> {
-                if(x=userID)
-                {
 
-                }
-                true
-            }
 
             else -> super.onOptionsItemSelected(item)
         }
@@ -257,3 +290,4 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
 
 }
+

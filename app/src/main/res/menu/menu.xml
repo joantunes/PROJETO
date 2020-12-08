@@ -5,10 +5,7 @@
         android:icon="@drawable/add"
         android:title="Add Marker"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/delete"
-        android:icon="@drawable/delete"
-        android:title="Add Marker"
-        app:showAsAction="ifRoom" />
+
 
     <item android:id="@+id/logout"
         android:title="Logout" />

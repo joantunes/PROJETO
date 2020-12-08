@@ -17,8 +17,9 @@ interface EndPoints  {
     @GET("/mySlim/api/logins")
     fun getProblems(): Call<List<problems>>
 
-    @GET("/mySlim/api/delete")
-    fun delete(): Call<List<problems>>
+    @GET("/mySlim/api/delete/{idProblema}")
+    fun delete(@Path("idProblema") id: Int): Call<OutputPost>
+
 
 
     @FormUrlEncoded
@@ -33,6 +34,11 @@ interface EndPoints  {
     @POST("/mySlim/api/post")
     fun postIN(@Field("userName") userName: String?, //FUNCAO POST LOGIN
                @Field("pwd") pwd: String? ): Call<OutputPost>
+
+    @FormUrlEncoded
+    @POST("/mySlim/api/markercomp")
+    fun postON(@Field("id") id: Int ): Call<OutputPost>//FUNCAO POST LOGIN
+
 
 
 
