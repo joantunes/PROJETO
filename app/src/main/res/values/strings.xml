@@ -23,4 +23,9 @@
     <string name="user" translatable="false">User</string>
     <string name="password" translatable="false">Password</string>
     <string name="title_activity_maps" translatable="false">Map</string>
+
+
+
+    //geodefence
+
 </resources>

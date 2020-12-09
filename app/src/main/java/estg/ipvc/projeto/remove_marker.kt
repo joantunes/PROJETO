@@ -9,6 +9,7 @@ import estg.ipvc.projeto.api.EndPoints
 import estg.ipvc.projeto.api.OutputPost
 import estg.ipvc.projeto.api.ServiceBuilder
 import kotlinx.android.synthetic.main.activity_add_marker.*
+import kotlinx.android.synthetic.main.activity_remove_marker.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,10 +18,13 @@ import retrofit2.Response
 
 class remove_marker : AppCompatActivity() {
     private var idProblema:Int=0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_remove_marker)
         idProblema=intent.getIntExtra("idProblema",idProblema)
+
     }
 
     fun deleteMarker(view: View) {

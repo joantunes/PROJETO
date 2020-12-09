@@ -37,7 +37,9 @@ interface EndPoints  {
 
     @FormUrlEncoded
     @POST("/mySlim/api/markercomp")
-    fun postON(@Field("id") id: Int ): Call<OutputPost>//FUNCAO POST LOGIN
+    fun postON(@Field("id") id: Int):Call<OutputPost>
+
+
 
 
 

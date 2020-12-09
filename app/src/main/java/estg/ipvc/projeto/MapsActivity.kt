@@ -1,8 +1,10 @@
 package estg.ipvc.projeto
 
+
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
@@ -20,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import estg.ipvc.projeto.api.EndPoints
@@ -90,11 +93,10 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
                         position = LatLng(problem.lat.toDouble(),
                                 problem.lng.toDouble())
 
-                         x = mMap.addMarker(
-                                        MarkerOptions()
+                        x = mMap.addMarker(
+                                MarkerOptions()
                                         .position(position).title(problem.userID.toString() + " " + problem.descr))
-                        x.tag=problem.id
-
+                        x.tag = problem.id
 
 
                     }
@@ -159,7 +161,18 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            val success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.mapstyle))
+            if (!success) {
+                Log.e("MapsActivity", "Style parsing failed.")
+            }
+        } catch (e: Resources.NotFoundException) {
+            Log.e("MapsActivity", "Can't find style. Error: ", e)
+        }
         setUpMap()
         mMap.setOnMarkerClickListener {
             val intent = Intent(this@MapsActivity, remove_marker::class.java)
@@ -172,19 +185,20 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
                 override fun onResponse(call: Call<OutputPost>, response: Response<OutputPost>) {
 
                     if (response.isSuccessful) {
-                      val a : OutputPost=response.body()!!
-                        userIDprob=a.userID
-                        Toast.makeText(this@MapsActivity,"dados:"+userIDprob, Toast.LENGTH_SHORT).show()
+                        val a: OutputPost = response.body()!!
+                        userIDprob = a.userID
+                        Toast.makeText(this@MapsActivity, "dados:" + userIDprob, Toast.LENGTH_SHORT).show()
 
                     }
                 }
+
                 override fun onFailure(call: Call<OutputPost>, t: Throwable) {
                     Toast.makeText(this@MapsActivity, "Erro", Toast.LENGTH_SHORT).show()
                 }
             })
             if (userIDprob==userID)
             {
-                intent.putExtra("idProblema",idProblema)
+                intent.putExtra("idProblema", idProblema)
                 startActivity(intent)
 
             }
