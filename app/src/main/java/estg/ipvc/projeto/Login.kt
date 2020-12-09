@@ -50,7 +50,7 @@ class Login : AppCompatActivity() {
                     idUser=x.id.toInt()
                     intent.putExtra("id_user",idUser)
                     val intent = Intent(this@Login, MapsActivity::class.java)
-                    Toast.makeText(this@Login, "Login Correto"+ x.id, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Login, "Login Correto"/*+ x.id*/, Toast.LENGTH_SHORT).show()
                     startActivity(intent)
 
                     var token = getSharedPreferences("user", Context.MODE_PRIVATE)  //

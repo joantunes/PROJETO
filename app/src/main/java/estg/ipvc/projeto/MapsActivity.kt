@@ -64,6 +64,7 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback, SensorEventListener
 
 
 
+
     //added to implement distance between two locations
     private var continenteLat: Double = 0.0
     private var continenteLong: Double = 0.0
@@ -177,13 +178,14 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback, SensorEventListener
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        Toast.makeText(this, cnt.toString(), Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this, cnt.toString(), Toast.LENGTH_SHORT).show()
 
         setUpMap()
         mMap.setOnMarkerClickListener {
             val intent = Intent(this@MapsActivity, remove_marker::class.java)
             val request = ServiceBuilder.buildService(EndPoints::class.java)
             val idProblema = it.tag
+
 
             val call = request.postON(idProblema as Int)
             call.enqueue(object : Callback<OutputPost> {

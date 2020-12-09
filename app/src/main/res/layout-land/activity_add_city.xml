@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add_marker">
+    tools:context=".AddCity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,52 +14,40 @@
         tools:layout_editor_absoluteY="129dp">
 
         <EditText
-            android:id="@+id/userID"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:hint="@string/userID"
+            android:hint="@string/hint_word"
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/lat"
+            android:id="@+id/notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:hint="@string/latitude"
-
+            android:hint="@string/hint_word2"
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/lng"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:hint="@string/longitute"
-            android:inputType="textAutoComplete"
-            android:minHeight="@dimen/min_height"
-            android:textSize="18sp" />
-        <EditText
-            android:id="@+id/descr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/big_padding"
-            android:fontFamily="sans-serif-light"
-            android:hint="@string/descr"
+            android:hint="@string/hint_word3"
             android:inputType="textAutoComplete"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp" />
 
         <Button
-            android:onClick="marker"
-            android:id="@+id/button_saveMarker"
+            android:id="@+id/button_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/big_padding"

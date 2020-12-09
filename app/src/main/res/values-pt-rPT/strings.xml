@@ -3,7 +3,7 @@
     <string name="app_name">PROJETO</string>
     <string name="file">ficheiro</string>
     <string name="create_new">criar_novo</string>
-    <string name="open">abrir</string>
+    <string name="open">Abrir</string>
     <string name="Edit">Editar</string>
     <string name="Options">Opções</string>
     <string name="Insert">Inserir</string>
@@ -14,8 +14,18 @@
     <string name="hint_word">Titulo</string>
     <string name="hint_word2">Nota</string>
     <string name="hint_word3">Data</string>
-    <string name="button_save">Save</string>
+    <string name="button_save">Guardar</string>
     <string name="button_delete">Remover</string>
     <string name="removeX">Remover Certo Titulo</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="userID">userID</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitute">Longitude</string>
+    <string name="descr">Descrição</string>
+    <string name="user">User</string>
+    <string name="nota_ja">Anote Já!</string>
+    <string name="cords">Coordenadas</string>
+    <string name="dist">Distância</string>
+    <string name="addMrk">Adicionar Marcador</string>
+    <string name="AddNte">Adicionar Nota</string>
 </resources>

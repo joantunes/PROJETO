@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/add"
         android:icon="@drawable/add"
-        android:title="Add Marker"
+        android:title="@string/addMrk"
         app:showAsAction="ifRoom" />
 
 
     <item android:id="@+id/logout"
         android:title="Logout" />
     <item android:id="@+id/addNote"
-        android:title="Add Note" />
+        android:title="@string/AddNte" />
 </menu>

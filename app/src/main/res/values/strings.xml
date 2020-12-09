@@ -23,7 +23,15 @@
     <string name="user" translatable="false">User</string>
     <string name="password" translatable="false">Password</string>
     <string name="title_activity_maps" translatable="false">Map</string>
-
+    <string name="userID">userID</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitute">Longitude</string>
+    <string name="descr">Description</string>
+    <string name="nota_ja">Note Now!</string>
+    <string name="cords">Coordenates</string>
+    <string name="dist">Distance</string>
+    <string name="addMrk">Add Marker</string>
+    <string name="AddNte">Add Note</string>
 
 
     //geodefence
