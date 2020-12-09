@@ -5,6 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
@@ -12,6 +16,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,15 +34,17 @@ import com.google.android.gms.maps.model.MarkerOptions
 import estg.ipvc.projeto.api.EndPoints
 import estg.ipvc.projeto.api.OutputPost
 import estg.ipvc.projeto.api.ServiceBuilder
+import kotlinx.android.synthetic.main.activity_maps.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(),OnMapReadyCallback, SensorEventListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var problems: List<problems>
+
 
     private var userID:Int=0
     private var userIDprob:Int=0
@@ -49,6 +57,12 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
     //added to implement location periodic updates
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
+    //SENSORES
+    var sensor : Sensor? = null
+    var sensorManager : SensorManager? = null
+    private var cnt : Int = 0
+
+
 
     //added to implement distance between two locations
     private var continenteLat: Double = 0.0
@@ -62,11 +76,13 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_LIGHT)
 
 ///////////////////////////// call the service and add markers ///////////////////////////////////////////////////
         val request = ServiceBuilder.buildService(EndPoints::class.java)
@@ -161,18 +177,8 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            val success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.mapstyle))
-            if (!success) {
-                Log.e("MapsActivity", "Style parsing failed.")
-            }
-        } catch (e: Resources.NotFoundException) {
-            Log.e("MapsActivity", "Can't find style. Error: ", e)
-        }
+        Toast.makeText(this, cnt.toString(), Toast.LENGTH_SHORT).show()
+
         setUpMap()
         mMap.setOnMarkerClickListener {
             val intent = Intent(this@MapsActivity, remove_marker::class.java)
@@ -245,12 +251,14 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
     override fun onPause() {
         super.onPause()
+        sensorManager!!.unregisterListener(this)
         fusedLocationClient.removeLocationUpdates(locationCallback)
         Log.d("**** ZE", "onPause - removeLocationUpdates")
     }
 
     public override fun onResume() {
         super.onResume()
+        sensorManager!!.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL)
         startLocationUpdates()
         Log.d("**** ZE", "onResume - startLocationUpdates")
     }
@@ -301,6 +309,57 @@ class MapsActivity : AppCompatActivity(),OnMapReadyCallback {
 
     }
 
+    override fun onSensorChanged(event: SensorEvent?) {
+        try {
+
+            if (event!!.values[0] < 30) {
+
+
+                try {
+                    // Customise the styling of the base map using a JSON object defined
+                    // in a raw resource file.
+                    val success = mMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    this, R.raw.mapstyle))
+                    if (!success) {
+                        Log.e("MapsActivity", "Style parsing failed.")
+                    }
+                } catch (e: Resources.NotFoundException) {
+                    Log.e("MapsActivity", "Can't find style. Error: ", e)
+                }
+
+
+
+            } else {
+
+                findViewById<FrameLayout>(R.id.map).visibility = View.VISIBLE
+                try {
+                    // Customise the styling of the base map using a JSON object defined
+                    // in a raw resource file.
+                    val success = mMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    this, R.raw.mapstyle2))
+                    if (!success) {
+                        Log.e("MapsActivity", "Style parsing failed.")
+                    }
+                } catch (e: Resources.NotFoundException) {
+                    Log.e("MapsActivity", "Can't find style. Error: ", e)
+                }
+
+            }
+
+        }
+        catch (e : Exception)
+        {
+
+        }
+    }
+
+
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+    }
 
 
 }
